@@ -1,18 +1,20 @@
 #include <Arduino.h>
 
-#include "hal/IDistanceSensor.h"
 #include "infra/UltraSonicSensor.h"
+#include "app/DistanceMonitoringService.h"
 
 #define echoPin 26
 #define trigPin 27
 
 UltraSonicSensor ultraSonicSensor(echoPin, trigPin);
-IDistanceSensor& sensor = ultraSonicSensor;
+IDistanceSensor &distanceSensor = ultraSonicSensor;
+
+DistanceMonitoringService service(distanceSensor);
 
 void setup()
 {
   Serial.begin(115200);
-  sensor.begin();
+  distanceSensor.begin();
 
   delay(2000);
   Serial.println("SETUP OK");
@@ -20,8 +22,15 @@ void setup()
 
 void loop()
 {
-  sensor.read();
-  Serial.println(sensor.getDistance());
+
+  if (service.isDoorOpen())
+  {
+    Serial.println("Door Open");
+  }
+
+  if (service.isMailInserted())
+  {
+    Serial.println("Letter");
+  }
   delay(1000);
 }
-
