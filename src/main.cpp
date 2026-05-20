@@ -8,6 +8,8 @@
 
 #include "infra/Wifi.h"
 
+#include "MailBoxState.h"
+
 #define echoPin 26
 #define trigPin 27
 
@@ -25,7 +27,7 @@ EmailService emailService(emailSender);
 void setup()
 {
   Serial.begin(115200);
-  
+
   wifi.connect();
   distanceSensor.begin();
 
@@ -36,16 +38,20 @@ void setup()
 void loop()
 {
 
-  if (service.isDoorOpen())
-  {
-    Serial.println("Door Open");
-    emailService.sendEmail("door Open");
-  }
+  MailBoxState eventBox = service.detectEvent();
 
-  if (service.isMailInserted())
+  switch (eventBox)
   {
-    Serial.println("Letter");
-    emailService.sendEmail("letter");
+  case MailBoxState::OPEN:
+    emailService.sendEmail("Door opened");
+    break;
+
+  case MailBoxState::MAIL_INSERTED:
+    emailService.sendEmail("Letter");
+    break;
+
+  default:
+    break;
   }
 
   delay(1000);

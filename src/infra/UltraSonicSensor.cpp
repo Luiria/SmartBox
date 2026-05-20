@@ -24,5 +24,6 @@ void UltraSonicSensor::read()
     long duration = pulseIn(this->echoPin, HIGH);
 
     // Calculating the distance
-    this->distance = duration * 0.034 / 2;
+    long newDistance = duration * 0.034 / 2;
+    setDistance(newDistance);
 }

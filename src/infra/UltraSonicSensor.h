@@ -19,6 +19,9 @@ public:
 
     // GETTERS
     long getDistance() { return this->distance; };
+
+    // SETTERS
+    void setDistance(long newDistance) { this->distance = newDistance;};
 };
 
 #endif
