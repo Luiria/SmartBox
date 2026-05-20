@@ -1,8 +1,13 @@
 #include <Arduino.h>
 
+#include "hal/IDistanceSensor.h"
 #include "infra/UltraSonicSensor.h"
 
-UltraSonicSensor sensor(26, 27);
+#define echoPin 26
+#define trigPin 27
+
+UltraSonicSensor ultraSonicSensor(echoPin, trigPin);
+IDistanceSensor& sensor = ultraSonicSensor;
 
 void setup()
 {

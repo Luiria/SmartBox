@@ -1,9 +1,10 @@
-#ifndef ULTRASONICSENSOR_H
-#define ULTRASONICSENSOR_H
+#ifndef ULTRA_SONIC_SENSOR_H
+#define ULTRA_SONIC_SENSOR_H
 
 #include <Arduino.h>
+#include "hal/IDistanceSensor.h"
 
-class UltraSonicSensor
+class UltraSonicSensor : public IDistanceSensor
 {
 private:
     uint8_t echoPin;
@@ -12,8 +13,9 @@ private:
 
 public:
     UltraSonicSensor(uint8_t echoPin, uint8_t trigPin);
-    void begin();
-    void read();
+
+    void begin() override;
+    void read() override;
 
     // GETTERS
     long getDistance() { return this->distance; };
