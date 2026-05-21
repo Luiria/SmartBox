@@ -7,7 +7,7 @@ class INotificationSender
 {
 
 public:
-    virtual void send(const char *subject) = 0;
+    virtual void send(const char *userEmail, const char *message) = 0;
     virtual ~INotificationSender() = default;
 };
 

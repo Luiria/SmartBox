@@ -16,7 +16,7 @@ public:
                     "Veuillez vérifier si vous avez reçu du courrier.";
 
         case MailBoxState::MAIL_INSERTED:
-            return "Une lettre a été détectée dans la boîte aux lettres.";
+            return "Du courier a été détectée dans la boîte aux lettres.";
 
         default:
             return nullptr;

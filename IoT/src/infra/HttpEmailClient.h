@@ -11,11 +11,11 @@ private:
     IWifi &wifi;
 
     bool checkWifi();
-    void handleError(int httpResponseCode);
+    bool handleError(int httpResponseCode);
 
 public:
     HttpEmailClient(IWifi &wifi);
-    void send(const char *subject) override;
+    void send(const char *userEmail, const char *message) override;
 };
 
 #endif

@@ -20,17 +20,20 @@ bool HttpEmailClient::checkWifi()
     return true;
 };
 
-void HttpEmailClient::handleError(int httpResponseCode)
+bool HttpEmailClient::handleError(int httpResponseCode)
 {
 
     if (httpResponseCode <= 0)
     {
         Serial.print("HTTP FAILED: ");
         Serial.println(httpResponseCode);
+        return false;
     }
+
+    return true;
 }
 
-void HttpEmailClient::send(const char *subject)
+void HttpEmailClient::send(const char *userEmail, const char *message)
 {
     if (!checkWifi())
         return;
@@ -42,11 +45,16 @@ void HttpEmailClient::send(const char *subject)
     http.begin(client, WEBHOOK_URL);
     http.addHeader("Content-Type", "application/json");
 
-    String payload = String("{\"subject\":\"") + subject + "\"}";
+    String payload = String("{") +
+                     "\"email\":\"" + userEmail +
+                     "\"," + "\"subject\":\"SmartBox - Nouvelle activité détectée\"," +
+                     "\"message\":\"" + message + "\"" +
+                     "}";
 
     int httpResponseCode = http.POST(payload);
-    handleError(httpResponseCode);
 
-    Serial.println("HTTP SEND: ");
+    if (handleError(httpResponseCode))
+        Serial.println("HTTP SEND");
+
     http.end();
 };

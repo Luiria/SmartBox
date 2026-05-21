@@ -43,6 +43,8 @@ void setup()
 
 void loop()
 {
+
+  Serial.println("start");
   MailBoxState event = monitoringService.detectEvent();
   notifierService.sendNotif(event);
 

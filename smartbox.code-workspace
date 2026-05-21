@@ -1,0 +1,8 @@
+{
+  "folders": [
+    { "path": "." },
+    { "path": "frontend" },
+    { "path": "backend" },
+    { "path": "Iot" }
+  ]
+}
