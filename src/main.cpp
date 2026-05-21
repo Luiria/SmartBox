@@ -4,7 +4,7 @@
 #include "app/DistanceMonitoringService.h"
 
 #include "infra/HttpEmailClient.h"
-#include "app/EmailService.h"
+#include "app/NotificationService.h"
 
 #include "infra/Wifi.h"
 
@@ -13,16 +13,21 @@
 #define echoPin 26
 #define trigPin 27
 
+// SENSOR
 UltraSonicSensor ultraSonicSensor(echoPin, trigPin);
 IDistanceSensor &distanceSensor = ultraSonicSensor;
-DistanceMonitoringService service(distanceSensor);
 
+// WIFI
 Wifi wifi;
 IWifi &wifiManager = wifi;
 
+// EMAIL
 HttpEmailClient httpEmail(wifiManager);
-IEmailSender &emailSender = httpEmail;
-EmailService emailService(emailSender);
+INotificationSender &notificationSender = httpEmail;
+
+// SERVICES
+DistanceMonitoringService monitoringService(distanceSensor);
+NotificationService notifierService(notificationSender);
 
 void setup()
 {
@@ -32,27 +37,14 @@ void setup()
   distanceSensor.begin();
 
   delay(2000);
+
   Serial.println("SETUP OK");
 }
 
 void loop()
 {
-
-  MailBoxState eventBox = service.detectEvent();
-
-  switch (eventBox)
-  {
-  case MailBoxState::OPEN:
-    emailService.sendEmail("Door opened");
-    break;
-
-  case MailBoxState::MAIL_INSERTED:
-    emailService.sendEmail("Letter");
-    break;
-
-  default:
-    break;
-  }
+  MailBoxState event = monitoringService.detectEvent();
+  notifierService.sendNotif(event);
 
   delay(1000);
 }

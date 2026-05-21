@@ -12,18 +12,20 @@ private:
     IDistanceSensor &sensor;
     int doorOpenThreshold;     // in cm
     int mailDetectedThreshold; // in cm
+    
     MailBoxState lastState;
+
+    bool isDoorOpen();
+    bool isMailInserted();
 
 public:
     DistanceMonitoringService(IDistanceSensor &sensor);
-    bool isDoorOpen();
-    bool isMailInserted();
+
     MailBoxState detectEvent();
 
     // GETTERS
     int getDoorOpenThreshold() { return this->doorOpenThreshold; };
     int getMailDetectedThreshold() { return this->mailDetectedThreshold; };
-
 };
 
 #endif

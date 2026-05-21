@@ -5,8 +5,6 @@
 #include "HttpEmailClient.h"
 #include "./secret.h"
 
-WiFiClientSecure client;
-
 HttpEmailClient::HttpEmailClient(IWifi &wifi)
     : wifi(wifi) {};
 
@@ -25,29 +23,30 @@ bool HttpEmailClient::checkWifi()
 void HttpEmailClient::handleError(int httpResponseCode)
 {
 
-    if (httpResponseCode < 0)
+    if (httpResponseCode <= 0)
     {
-        Serial.print("HTTP error: ");
+        Serial.print("HTTP FAILED: ");
         Serial.println(httpResponseCode);
     }
 }
 
 void HttpEmailClient::send(const char *subject)
 {
-
     if (!checkWifi())
         return;
 
+    WiFiClientSecure client;
     client.setInsecure();
-    HTTPClient http;
-    http.begin(WEBHOOK_URL);
 
+    HTTPClient http;
+    http.begin(client, WEBHOOK_URL);
     http.addHeader("Content-Type", "application/json");
 
-    char payload[100];
-    sprintf(payload, "{\"subject\":\"%s\"}", subject);
+    String payload = String("{\"subject\":\"") + subject + "\"}";
 
     int httpResponseCode = http.POST(payload);
     handleError(httpResponseCode);
+
+    Serial.println("HTTP SEND: ");
     http.end();
 };
