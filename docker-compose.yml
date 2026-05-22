@@ -1,0 +1,46 @@
+
+services:
+    
+  backend:
+    build: ./backend
+    image: smartbox-backend:v1.0
+    container_name: smartbox-backend
+    restart: unless-stopped
+    
+    ports:
+      - "3000:3000"
+
+    environment:
+      NODE_ENV: production 
+    
+    env_file:
+    - .env
+
+    depends_on:
+      - mqtt
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+
+  mqtt:
+    image: eclipse-mosquitto:2.0
+    container_name: smartBox_mqtt
+    restart: unless-stopped
+
+    ports:
+      - "1883:1883"
+
+    volumes:
+          - mosquitto_data:/mosquitto/data
+          - mosquitto_log:/mosquitto/log
+
+
+volumes:
+  mosquitto_data:
+  mosquitto_log:  
+            
+

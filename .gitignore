@@ -1,29 +1,27 @@
-
-# =========================
 # GLOBAL
-# =========================
 
-.vscode/*
+.vscode/
 !.vscode/settings.json
 !.vscode/extensions.json
 
-# =========================
+.env
+*.log
+
 # FRONTEND
-# =========================
 
 
-# =========================
 # BACKEND
-# =========================
+
+node_modules/
+
+# MQTT / MOSQUITTO
+
+mosquitto/data/
+mosquitto/log/
+
+!mosquitto/data/.gitkeep
+!mosquitto/log/.gitkeep
 
 
-# =========================
 # IOT / PLATFORMIO
-# =========================
-
 # see IoT/.gitignore
-
-# =========================
-# DOCKER
-# =========================
-

@@ -1,0 +1,17 @@
+services:
+
+  backend:
+    command: npm run dev
+
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+    environment:
+      NODE_ENV: development
+
+  mqtt:
+      volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
