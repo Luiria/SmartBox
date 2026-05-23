@@ -22,8 +22,8 @@ String MailBoxMessages::buildEvent(
     const char *message)
 {
     return String("{") +
-           "\"email\":\"" + email +
-           "\"," + "\"subject\":\"" + subject + "," +
+           "\"email\":\"" + email + "\"," +
+           "\"subject\":\"" + subject + "\"," +
            "\"message\":\"" + message + "\"" +
            "}";
 }
