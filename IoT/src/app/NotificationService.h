@@ -3,7 +3,8 @@
 
 #include <Arduino.h>
 
-#include "interfaces/INotificationSender.h"
+#include "interfaces/IMessagePublisher.h"
+#include "infra/MqttService.h"
 #include "DistanceMonitoringService.h"
 
 #include "domain/MailBoxState.h"
@@ -15,11 +16,11 @@ class NotificationService
 {
 
 private:
-    INotificationSender &notificationSender;
+    IMessagePublisher &publisher;
 
 public:
-    NotificationService(INotificationSender &notificationSender);
-    void send(const char *message, const char *email);
+    NotificationService(IMessagePublisher &publisher);
+    void send(MailBoxState event);
 };
 
 #endif

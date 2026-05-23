@@ -27,22 +27,34 @@ DistanceMonitoringService monitoringService(distanceSensor);
 // WIFI
 Wifi wifi;
 
-// EMAIL
-HttpEmailClient httpEmail(wifi);
-INotificationSender &notificationSender = httpEmail;
-
 // NOTIFICATION
-NotificationService notifierService(notificationSender);
-
-// MQTT
+HttpEmailClient httpEmail(wifi);
 MqttService mqtt;
+
+IMessagePublisher *publisher = nullptr;
+NotificationService *notifierService = nullptr;
 
 void setup()
 {
   Serial.begin(115200);
 
   wifi.connect();
-  mqtt.begin(MQTT_SERVER, MQTT_PORT, MQTT_USER, MQTT_KEY);
+
+  if (PUBLISH_MODE == MQTT_MODE)
+  {
+    publisher = &mqtt;
+    mqtt.begin(MQTT_SERVER, MQTT_PORT, MQTT_USER, MQTT_KEY);
+
+    Serial.println("MODE MQTT");
+  }
+  else
+  {
+    publisher = &httpEmail;
+    Serial.println("MODE HTTP");
+  }
+
+  static NotificationService service(*publisher);
+  notifierService = &service;
 
   distanceSensor.begin();
 
@@ -52,24 +64,13 @@ void setup()
 
 void loop()
 {
-  mqtt.loop();
+  if (PUBLISH_MODE == MQTT_MODE)
+    mqtt.loop();
+
   Serial.println("start");
 
   MailBoxState event = monitoringService.detectEvent();
-
-  if (event != MailBoxState::NONE)
-  {
-
-    const char *message = MailBoxMessages::getMessage(event);
-
-    String payload = MailBoxMessages::buildEvent(
-        USER_EMAIL,
-        EMAIL_SUBJECT,
-        message);
-
-    // notifierService.send(message, USER_EMAIL);
-    mqtt.publish(payload);
-  }
+  notifierService->send(event);
 
   delay(1000);
 }

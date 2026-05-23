@@ -1,10 +1,10 @@
 #ifndef HTTP_EMAIL_CLIENT_H
 #define HTTP_EMAIL_CLIENT_H
 
-#include "interfaces/INotificationSender.h"
+#include "interfaces/IMessagePublisher.h"
 #include "Wifi.h"
 
-class HttpEmailClient : public INotificationSender
+class HttpEmailClient : public IMessagePublisher
 {
 
 private:
@@ -15,7 +15,7 @@ private:
 
 public:
     HttpEmailClient(Wifi &wifi);
-    void send(const char *userEmail, const char *message) override;
+    void publish(const char *payload) override;
 };
 
 #endif
