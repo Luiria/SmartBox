@@ -13,8 +13,8 @@
 
 #include "hal/UltraSonicSensor.h"
 
-#include "MailBoxState.h"
-#include "MailBoxMessage.h"
+#include "domain/MailBoxState.h"
+#include "domain/MailBoxMessage.h"
 
 #define echoPin 26
 #define trigPin 27

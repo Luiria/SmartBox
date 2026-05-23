@@ -1,9 +1,13 @@
 #ifndef DISTANCE_MONITORING_SERVICE_H
 #define DISTANCE_MONITORING_SERVICE_H
 
+#include <Arduino.h>
+
+#include "interfaces/IDistanceSensor.h"
 #include "interfaces/IDistanceSensor.h"
 
-#include "MailBoxState.h"
+#include "domain/MailBoxState.h"
+#include "domain/MailBoxState.h"
 
 class DistanceMonitoringService
 {

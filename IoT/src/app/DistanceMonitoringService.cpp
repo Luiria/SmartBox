@@ -1,9 +1,4 @@
-#include <Arduino.h>
-
-#include "interfaces/IDistanceSensor.h"
 #include "DistanceMonitoringService.h"
-
-#include "MailBoxState.h"
 
 DistanceMonitoringService::DistanceMonitoringService(IDistanceSensor &sensor)
     : sensor(sensor)

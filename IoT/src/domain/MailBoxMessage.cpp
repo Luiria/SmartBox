@@ -1,4 +1,4 @@
-#include "MailBoxMessage.h"
+#include "domain/MailBoxMessage.h"
 
 const char *MailBoxMessages::getMessage(MailBoxState state)
 {

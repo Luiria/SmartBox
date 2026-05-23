@@ -1,6 +1,10 @@
 #ifndef WIFI_H
 #define WIFI_H
 
+#include <WiFiClientSecure.h>
+
+#include "./secret.h"
+
 class Wifi 
 {
 

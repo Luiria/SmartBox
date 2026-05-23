@@ -1,7 +1,4 @@
-#include <WiFiClientSecure.h>
-
 #include "Wifi.h"
-#include "./secret.h"
 
 void Wifi::connect()
 {
