@@ -5,7 +5,7 @@
 #include "HttpEmailClient.h"
 #include "./secret.h"
 
-HttpEmailClient::HttpEmailClient(IWifi &wifi)
+HttpEmailClient::HttpEmailClient(Wifi &wifi)
     : wifi(wifi) {};
 
 bool HttpEmailClient::checkWifi()

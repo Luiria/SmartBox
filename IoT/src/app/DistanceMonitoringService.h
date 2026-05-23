@@ -1,7 +1,7 @@
 #ifndef DISTANCE_MONITORING_SERVICE_H
 #define DISTANCE_MONITORING_SERVICE_H
 
-#include "hal/IDistanceSensor.h"
+#include "interfaces/IDistanceSensor.h"
 
 #include "MailBoxState.h"
 

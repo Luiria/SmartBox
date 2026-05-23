@@ -3,7 +3,7 @@
 #include "secret.h"
 #include "infra/MqttService.h"
 
-#include "infra/UltraSonicSensor.h"
+#include "interfaces/IDistanceSensor.h"
 #include "app/DistanceMonitoringService.h"
 
 #include "infra/HttpEmailClient.h"
@@ -11,8 +11,10 @@
 
 #include "infra/Wifi.h"
 
+#include "hal/UltraSonicSensor.h"
+
 #include "MailBoxState.h"
-#include "MailBoxMessages.h"
+#include "MailBoxMessage.h"
 
 #define echoPin 26
 #define trigPin 27
@@ -20,19 +22,19 @@
 // SENSOR
 UltraSonicSensor ultraSonicSensor(echoPin, trigPin);
 IDistanceSensor &distanceSensor = ultraSonicSensor;
+DistanceMonitoringService monitoringService(distanceSensor);
 
 // WIFI
 Wifi wifi;
-IWifi &wifiManager = wifi;
 
 // EMAIL
-HttpEmailClient httpEmail(wifiManager);
+HttpEmailClient httpEmail(wifi);
 INotificationSender &notificationSender = httpEmail;
 
-// SERVICES
-DistanceMonitoringService monitoringService(distanceSensor);
+// NOTIFICATION
 NotificationService notifierService(notificationSender);
 
+// MQTT
 MqttService mqtt;
 
 void setup()
@@ -45,41 +47,28 @@ void setup()
   distanceSensor.begin();
 
   delay(2000);
-
   Serial.println("SETUP OK");
 }
 
 void loop()
 {
-
   mqtt.loop();
-
   Serial.println("start");
+
   MailBoxState event = monitoringService.detectEvent();
 
-  // notifierService.sendNotif(event);
-
-  const char *message = MailBoxMessages::getMessage(event);
-
-  if (message != nullptr)
+  if (event != MailBoxState::NONE)
   {
 
-    static unsigned long lastSend = 0;
+    const char *message = MailBoxMessages::getMessage(event);
 
-    if (millis() - lastSend > 5000)
-    {
-      lastSend = millis();
+    String payload = MailBoxMessages::buildEvent(
+        USER_EMAIL,
+        EMAIL_SUBJECT,
+        message);
 
-      String payload = String("{") +
-                       "\"email\":\"" + USER_EMAIL +
-                       "\"," + "\"subject\":\"SmartBox - Nouvelle activité détectée\"," +
-                       "\"message\":\"" + message + "\"" +
-                       "}";
-
-      String feed = String(MQTT_USER) + "/feeds/" + MQTT_FEED_NAME;
-      mqtt.publish(feed.c_str(), payload.c_str());
-      Serial.println("MQTT SEND");
-    }
+    // notifierService.send(message, USER_EMAIL);
+    mqtt.publish(payload);
   }
 
   delay(1000);

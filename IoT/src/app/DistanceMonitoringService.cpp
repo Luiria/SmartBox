@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-#include "hal/IDistanceSensor.h"
+#include "interfaces/IDistanceSensor.h"
 #include "DistanceMonitoringService.h"
 
 #include "MailBoxState.h"

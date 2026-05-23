@@ -1,20 +1,20 @@
 #ifndef HTTP_EMAIL_CLIENT_H
 #define HTTP_EMAIL_CLIENT_H
 
-#include "hal/INotificationSender.h"
-#include "hal/IWifi.h"
+#include "interfaces/INotificationSender.h"
+#include "Wifi.h"
 
 class HttpEmailClient : public INotificationSender
 {
 
 private:
-    IWifi &wifi;
+    Wifi &wifi;
 
     bool checkWifi();
     bool handleError(int httpResponseCode);
 
 public:
-    HttpEmailClient(IWifi &wifi);
+    HttpEmailClient(Wifi &wifi);
     void send(const char *userEmail, const char *message) override;
 };
 

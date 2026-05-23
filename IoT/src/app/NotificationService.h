@@ -2,7 +2,7 @@
 #define EMAIL_SERVICE_H
 
 #include <Arduino.h>
-#include "hal/INotificationSender.h"
+#include "interfaces/INotificationSender.h"
 #include "DistanceMonitoringService.h"
 
 class NotificationService
@@ -13,7 +13,7 @@ private:
 
 public:
     NotificationService(INotificationSender &notificationSender);
-    void sendNotif(MailBoxState event);
+    void send(const char *message, const char *email);
 };
 
 #endif

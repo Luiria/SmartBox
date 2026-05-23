@@ -10,9 +10,16 @@ private:
     WiFiClient espClient;
     PubSubClient client;
 
+    const char *server;
+    int port;
+    const char *user;
+    const char *pass;
+
+    void reconnect();
+
 public:
     MqttService();
-    void begin(const char *server,  int port, const char *user, const char *pass);
-    void publish(const char *topic, const char *message);
+    void begin(const char *server, int port, const char *user, const char *pass);
     void loop();
+    void publish(String payload);
 };
