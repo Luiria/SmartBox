@@ -67,8 +67,6 @@ void loop()
   if (PUBLISH_MODE == MQTT_MODE)
     mqtt.loop();
 
-  Serial.println("start");
-
   MailBoxState event = monitoringService.detectEvent();
   notifierService->send(event);
 
