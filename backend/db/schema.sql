@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS events (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    external_id VARCHAR(255) NOT NULL,
+    external_id VARCHAR(255) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL,
-    message VARCHAR(500),
-    created_at TIMESTAMP NOT NULL
+    message VARCHAR(500) NOT NULL,
+    created_at VARCHAR(25) NOT NULL
 ) ENGINE = InnoDB;

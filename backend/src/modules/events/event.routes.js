@@ -4,7 +4,7 @@ export default function eventRoutes(controller) {
 
     const router = express.Router();
 
-    router.get("/latest", controller.getLatest);
+    router.get("/sync", controller.sync);
 
     return router;
 }

@@ -1,6 +1,6 @@
 export default function safeParse(value) {
 
-    if (value !== "string") return value;
+    if (typeof value === "object") return value;
 
     try {
         return JSON.parse(value);

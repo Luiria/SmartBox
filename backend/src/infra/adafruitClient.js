@@ -7,7 +7,34 @@ export default class AdafruitClient {
         this.key = env.ADAFRUIT_KEY;
     }
 
-    async getLatest() {
+    // async getLatest() {
+    //     try {
+    //         const res = await axios({
+    //             method: "get",
+    //             url: this.url,
+    //             headers: {
+    //                 "X-AIO-Key": this.key,
+    //             },
+    //             params: {
+    //                 limit: 1,
+    //             }
+    //         });
+
+    //         return res.data[0];
+
+    //     } catch (error) {
+
+    //         console.error("[AdafruitClient] API error:", {
+    //             message: error.message,
+    //             code: error.code,
+    //             response: error.response?.data,
+    //         });
+
+    //         throw new Error("ADAFRUIT_API_FAILED");
+    //     }
+    // }
+
+    async getLatest(maxItem) {
         try {
             const res = await axios({
                 method: "get",
@@ -16,11 +43,11 @@ export default class AdafruitClient {
                     "X-AIO-Key": this.key,
                 },
                 params: {
-                    limit: 1,
+                    limit: maxItem,
                 }
             });
-
-            return res.data[0];
+            
+            return res.data;
 
         } catch (error) {
 
@@ -33,4 +60,5 @@ export default class AdafruitClient {
             throw new Error("ADAFRUIT_API_FAILED");
         }
     }
+
 }
