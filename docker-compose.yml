@@ -17,14 +17,54 @@ services:
     - .env
 
     depends_on:
-      - mqtt
-
+      mysql:
+        condition: service_healthy
+      mqtt:
+        condition: service_started
+      
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
       interval: 30s
       timeout: 10s
       retries: 3
 
+  mysql:
+    image: mysql:8
+    container_name: smartbox-mysql
+    restart: always
+
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+
+    ports:
+      - "${DB_PORT}:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./backend/db/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+    
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: smartbox-phpmyadmin
+    restart: unless-stopped
+
+    ports:
+      - "${PMA_PORT}:80"
+
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+
+    depends_on:
+      - mysql
 
   mqtt:
     image: eclipse-mosquitto:2.0
@@ -42,5 +82,5 @@ services:
 volumes:
   mosquitto_data:
   mosquitto_log:  
+  mysql_data:
             
-
