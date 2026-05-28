@@ -3,5 +3,6 @@ CREATE TABLE IF NOT EXISTS events (
     external_id VARCHAR(255) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL,
     message VARCHAR(500) NOT NULL,
-    created_at VARCHAR(25) NOT NULL
+    created_at VARCHAR(25) NOT NULL,
+    sent BOOLEAN DEFAULT FALSE
 ) ENGINE = InnoDB;

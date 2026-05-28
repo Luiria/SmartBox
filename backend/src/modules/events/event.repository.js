@@ -30,4 +30,53 @@ export default class EventRepository {
         return true;
     }
 
+    async getAndMarkNextEvent() {
+
+        const connection = await this.db.getConnection();
+
+        try {
+
+            await connection.beginTransaction();
+
+            const [rows] = await connection.execute(
+                `
+                SELECT *
+                FROM events
+                WHERE sent = FALSE
+                ORDER BY created_at DESC
+                LIMIT 1
+                FOR UPDATE
+                `
+            );
+
+            const event = rows[0];
+
+            if (!event) {
+                await connection.commit();
+                return null;
+            }
+
+            await connection.execute(
+                `
+                UPDATE events
+                SET sent = TRUE
+                WHERE id = ?
+                `,
+                [event.id]
+            );
+
+            await connection.commit();
+            return event;
+
+        } catch (error) {
+            await connection.rollback();
+            throw error;
+
+        } finally {
+            connection.release();
+        }
+    }
+
+
+
 }

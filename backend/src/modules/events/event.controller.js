@@ -29,7 +29,33 @@ export default function eventController(service) {
         }
     }
 
+    async function getNewEvent(req, res) {
+
+        try {
+
+            const event = await service.getLatestUnsent();
+
+            if (!event) return res.sendStatus(204);
+
+            res.status(200).json({
+                success: true,
+                message: "Event fetched",
+                data: event
+            })
+
+        } catch (error) {
+
+            console.error("[EventController] getNewEvent failed:", error.message);
+
+            return res.status(500).json({
+                success: false,
+                error: "Internal server error"
+            });
+        }
+    }
+
     return {
-        sync
+        sync,
+        getNewEvent
     };
 }   

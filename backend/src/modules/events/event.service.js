@@ -45,6 +45,25 @@ export default class EventService {
 
     }
 
+    async getLatestUnsent() {
+
+        console.log("[EventService] getLatestUnsent started");
+
+        const event = await this.repository.getAndMarkNextEvent();
+
+        if (!event) {
+            console.log(`[EventService] No unsent event found`);
+            console.log("[EventService] getLatestUnsent completed");
+            return null;
+        }
+
+        console.log(`[EventService] event ${event.id} marked as sent`);
+        console.log("[EventService] getLatestUnsent completed");
+
+        return event;
+
+    }
+
 }
 
 
