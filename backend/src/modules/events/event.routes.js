@@ -4,8 +4,9 @@ export default function eventRoutes(controller) {
 
     const router = express.Router();
 
+    router.get("/", controller.getAllEvents)
     router.post("/sync", controller.sync);
-    router.get("/new", controller.getNewEvent)
+    router.get("/latest", controller.getNewEvent)
     return router;
 }
 

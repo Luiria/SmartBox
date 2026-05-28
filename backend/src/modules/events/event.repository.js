@@ -77,6 +77,13 @@ export default class EventRepository {
         }
     }
 
+    async getAllEvents() {
 
+        const [rows] = await this.db.execute(
+            `SELECT * FROM events;`
+        );
+
+        return rows || null;
+    }
 
 }

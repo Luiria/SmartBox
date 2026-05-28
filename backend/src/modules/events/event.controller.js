@@ -34,7 +34,6 @@ export default function eventController(service) {
         try {
 
             const event = await service.getLatestUnsent();
-
             if (!event) return res.sendStatus(204);
 
             res.status(200).json({
@@ -54,8 +53,33 @@ export default function eventController(service) {
         }
     }
 
+    async function getAllEvents(req, res) {
+
+        try {
+
+            const events = await service.getAll();
+            if (!events || events.length === 0) return res.sendStatus(204);
+
+            res.status(200).json({
+                success: true,
+                message: "Events fetched",
+                data: events
+            })
+
+        } catch (error) {
+
+            console.error("[EventController] getAllEvent failed:", error.message);
+
+            return res.status(500).json({
+                success: false,
+                error: "Internal server error"
+            });
+        }
+    }
+
     return {
         sync,
-        getNewEvent
+        getNewEvent,
+        getAllEvents
     };
 }   

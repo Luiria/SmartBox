@@ -64,6 +64,24 @@ export default class EventService {
 
     }
 
+    async getAll() {
+
+        console.log("[EventService] getAllEvent started");
+
+        const events = await this.repository.getAllEvents();
+
+        if (!events || events.length === 0) {
+            console.log(`[EventService] No event found`);
+            console.log("[EventService] getAllEvent completed");
+            return null;
+        }
+
+        console.log(`[EventService] ${events.length} events fetched`);
+        console.log("[EventService] getLatestUnsent completed");
+
+        return events;
+    }
+
 }
 
 
