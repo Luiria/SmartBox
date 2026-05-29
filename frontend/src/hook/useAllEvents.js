@@ -6,23 +6,36 @@ export function useAllEvents() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        async function getAll() {
+    async function fetchEvents() {
+        try {
+            setLoading(true);
 
-            try {
-                const data = await fetchAllEvents();
-                setEvents(data);
+            const data = await fetchAllEvents();
 
-            } catch (err) {
-                console.error("[useGetAllEvents]", err);
-                setError(import.meta.env.VITE_ERROR_MESSAGE);
-            } finally {
-                setLoading(false);
-            }
+            setEvents(data);
+            setError(null);
+
+        } catch (err) {
+            console.error("[useAllEvents]", err);
+            setError("Failed to load events");
+        } finally {
+            setLoading(false);
         }
+    }
 
-        getAll();
+    useEffect(() => {
+        async function load() {
+            fetchEvents();
+        }
+        load();
+
     }, []);
 
-    return { events, loading, error };
+    return {
+        events,
+        loading,
+        error,
+        refetch: fetchEvents
+    };
+
 }
