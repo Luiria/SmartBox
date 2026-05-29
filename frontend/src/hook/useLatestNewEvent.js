@@ -10,14 +10,9 @@ export function useLatestNewEvent() {
 
             try {
                 const data = await fetchLatestNewsEvent();
-                if(!data) return ;
+                if (!data) return;
 
-                setNotifications(prev => {
-                    //  check
-                    // if (prev.find(n => n.id === data.id)) return prev;
-
-                    return [...prev, data];
-                });
+                setNotifications(prev => [...prev, data]);
 
                 setTimeout(() => {
                     setNotifications(prev =>
