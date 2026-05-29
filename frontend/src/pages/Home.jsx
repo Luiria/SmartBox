@@ -1,5 +1,5 @@
-import EventList from "../components/eventList.jsx";
-import Notification from "../components/Notification.jsx";
+import EventList from "../components/EventList/EventList.jsx";
+import Notification from "../components/Notification/Notification.jsx";
 import { useLatestNewEvent } from "../hook/useLatestNewEvent.js";
 
 export default function Home() {
@@ -8,8 +8,8 @@ export default function Home() {
 
   return (
     <>
-      <Notification notifications={notifications}  />
-      <EventList />;
+      <Notification notifications={notifications} />
+      <EventList />
     </>
   );
 }
