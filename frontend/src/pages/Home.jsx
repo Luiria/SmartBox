@@ -3,11 +3,12 @@ import Notification from "../components/Notification.jsx";
 import { useLatestNewEvent } from "../hook/useLatestNewEvent.js";
 
 export default function Home() {
-  const { event, error } = useLatestNewEvent();
+  const { notifications } = useLatestNewEvent();
+  console.log(notifications);
 
   return (
     <>
-      <Notification event={event} error={error} />
+      <Notification notifications={notifications}  />
       <EventList />;
     </>
   );

@@ -1,23 +1,24 @@
-export default function Notification({ event, error }) {
-  if (!event) return null;
+export default function Notification({ notifications }) {
+  if (!notifications || notifications.length === 0 ) return null;
 
   return (
-    <div
-      className="notification"
-      style={{
-        border: "1px solid red",
-        padding: "10px",
-        borderRadius: "6px",
-      }}
-    >
-      {error ? (
-        <p className="error">⚠️ {error}</p>
-      ) : (
-        <>
-          <strong>{event.email}</strong>
-          <p>{event.message}</p>
-        </>
-      )}
+    <div className="notification-container">
+      <ul>
+
+        {notifications.map((event) => (
+
+          <li
+            key={event.id}
+            className="notification"
+            style={{border: "1px solid red", padding: "8px", marginBottom: "8px" }}
+          >
+            <p>{event.message}</p>
+            <strong>{event.created_at}</strong>
+          </li>
+
+        ))}
+
+      </ul>
     </div>
   );
 }

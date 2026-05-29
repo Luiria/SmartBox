@@ -3,19 +3,32 @@ import { fetchLatestNewsEvent } from "../api/event.api";
 
 export function useLatestNewEvent() {
 
-    const [event, setEvent] = useState(null);
-    const [error, setError] = useState(null);
+    const [notifications, setNotifications] = useState([]);
 
     useEffect(() => {
         async function load() {
 
             try {
                 const data = await fetchLatestNewsEvent();
-                setEvent(data);
+                if(!data) return ;
+
+                setNotifications(prev => {
+                    //  check
+                    // if (prev.find(n => n.id === data.id)) return prev;
+
+                    return [...prev, data];
+                });
+
+                setTimeout(() => {
+                    setNotifications(prev =>
+                        prev.filter(n => n.id != data.id)
+                    );
+                }, 10000)
+
+
             } catch (err) {
                 console.error("[useLatestNewEvent]", err);
-                setError(import.meta.env.VITE_ERROR_MESSAGE);
-            } 
+            }
         }
         load();
 
@@ -23,5 +36,5 @@ export function useLatestNewEvent() {
         return () => clearInterval(interval);
     }, []);
 
-    return { event, error };
+    return { notifications };
 }
