@@ -1,6 +1,7 @@
 .eventList {
     width: 100%;
     max-width: 800px;
+    height: 75vh;
     margin: 0 auto;
 
     display: flex;
@@ -8,7 +9,6 @@
     align-items: center;
 
     gap: 24px;
-
 }
 
 .eventList button {
@@ -48,6 +48,6 @@
 
     padding: 15px;
 
-    height: 650px;
+    height: 680px;
     overflow-y: scroll;
 }
