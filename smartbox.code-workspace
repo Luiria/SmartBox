@@ -3,6 +3,9 @@
     { "path": "." },
     { "path": "frontend" },
     { "path": "backend" },
-    { "path": "Iot" }
-  ]
+    { "path": "Iot" },
+  ],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "frontend",
+  },
 }

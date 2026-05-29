@@ -18,13 +18,13 @@ export default function eventController(service) {
             if (error.message === "ADAFRUIT_API_FAILED") {
                 return res.status(503).json({
                     success: false,
-                    error: "External service unavailable"
+                    message: "External service unavailable"
                 });
             }
 
             return res.status(500).json({
                 success: false,
-                error: "Internal server error"
+                message: "Internal server error"
             });
         }
     }
@@ -48,7 +48,7 @@ export default function eventController(service) {
 
             return res.status(500).json({
                 success: false,
-                error: "Internal server error"
+                message: "Internal server error"
             });
         }
     }
@@ -72,7 +72,7 @@ export default function eventController(service) {
 
             return res.status(500).json({
                 success: false,
-                error: "Internal server error"
+                message: "Internal server error"
             });
         }
     }
