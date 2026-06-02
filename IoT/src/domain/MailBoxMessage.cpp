@@ -5,11 +5,11 @@ const char *MailBoxMessages::getMessage(MailBoxState state)
     switch (state)
     {
     case MailBoxState::OPEN:
-        return "La porte de la boîte aux lettres a été ouverte."
-               "Veuillez vérifier si vous avez reçu du courrier.";
+        return "The mailbox door was opened. "
+               "Please check whether you have received any mail.";
 
     case MailBoxState::MAIL_INSERTED:
-        return "Du courier a été détectée dans la boîte aux lettres.";
+        return "New mail has been detected in the mailbox.";
 
     default:
         return nullptr;
