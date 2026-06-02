@@ -43,7 +43,7 @@ export default class EventRepository {
                 SELECT *
                 FROM events
                 WHERE sent = FALSE
-                ORDER BY created_at DESC
+                ORDER BY created_at ASC
                 LIMIT 1
                 FOR UPDATE
                 `
@@ -80,7 +80,10 @@ export default class EventRepository {
     async getAllEvents() {
 
         const [rows] = await this.db.execute(
-            `SELECT * FROM events;`
+            `
+            SELECT * FROM events
+            ORDER BY created_at DESC
+            `
         );
 
         return rows || null;
