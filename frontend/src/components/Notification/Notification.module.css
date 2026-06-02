@@ -1,6 +1,6 @@
 .notification_container {
 
-    position: fixed;
+    position: absolute;
 
     top: 20px;
     right: 20px;
@@ -27,17 +27,12 @@
 
     padding: 18px;
 
-    background:
-        linear-gradient(135deg,
-            #6366f1,
-            #4f46e5);
+    border-radius: var(--radius-md);
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
 
-
-
-    border-radius: 16px;
-
-    box-shadow:
-        0 12px 30px rgba(79, 70, 229, 0.35);
+    border: 1px solid var(--glass-border);
+    box-shadow: 4px 4px 4px var(--shadow);
 
     animation: slideIn 0.3s ease;
 
@@ -63,7 +58,7 @@
         opacity: 0;
 
         transform:
-            translateX(30px);
+            translateX(28px);
     }
 
     to {

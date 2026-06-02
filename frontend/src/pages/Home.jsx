@@ -4,7 +4,7 @@ import Header from "../components/Header/Header.jsx";
 import Notification from "../components/Notification/Notification.jsx";
 import { useLatestNewEvent } from "../hook/useLatestNewEvent.js";
 
-import styles from "./Home.jsx";
+import styles from "./Home.module.css";
 
 export default function Home() {
   const { notifications } = useLatestNewEvent();
@@ -12,10 +12,14 @@ export default function Home() {
   return (
     <div className={styles.home}>
       <Header />
-      <Notification notifications={notifications} />
-      
+
       <main className={styles.main}>
-        <EventList />
+        <Notification notifications={notifications} />
+        
+
+        <div className={styles.eventList}>
+          <EventList />
+        </div>
       </main>
       <Footer />
     </div>

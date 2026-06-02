@@ -10,14 +10,8 @@ body {
 
     min-height: 100vh;
 
-    background:
-        linear-gradient(
-            180deg,
-            #0f172a 0%,
-            #020617 100%
-        );
-
-    color: var(--text);
+    background: var(--gradient-primary);
+    color: var(--on-surface);
 
     font-family:
         Inter,

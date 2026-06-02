@@ -1,7 +1,7 @@
 import { useAllEvents } from "../../hook/useAllEvents.js";
 import Event from "../Event/Event.jsx";
 
-import styles from "./EventList.module.css";
+import "./EventList.module.css";
 
 export default function EventList() {
   const { events, loading, error, refetch } = useAllEvents();
@@ -11,8 +11,7 @@ export default function EventList() {
   if (events.length === 0) return <p>No events yet</p>;
 
   return (
-    <div className={styles.eventList}>
-      
+    <>
       <div>
         <button onClick={refetch} disabled={loading}>
           Refresh
@@ -26,6 +25,6 @@ export default function EventList() {
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 }

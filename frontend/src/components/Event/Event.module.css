@@ -2,7 +2,7 @@
 
     display: flex;
     flex-direction: column;
-    
+
     gap: 12px;
     padding: 24px;
 
@@ -13,6 +13,9 @@
     background: rgba(17, 24, 39, 0.85);
     box-shadow: var(--shadow);
 
+    font-size: var(--text-body);
+    color: var(--on-surface);
+
     transition:
         transform 0.2s ease,
         border-color 0.2s ease;
@@ -21,21 +24,18 @@
 .event:hover {
     transform: translateY(-4px);
     border-color:
-        rgba(99, 102, 241, 0.4);
+        var(--border-hover);
 }
 
 .email {
-    font-size: 1rem;
     font-weight: 700;
-    color: white;
 }
 
 .message {
-    color: var(--text-muted);
     line-height: 1.5;
 }
 
 .date {
-    font-size: 0.85rem;
-    color: #6b7280;
+    font-size:var(--text-caption);
+    color: var(--on-surface-disabled);
 }
