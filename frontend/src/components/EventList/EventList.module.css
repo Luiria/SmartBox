@@ -1,0 +1,43 @@
+button {
+
+    padding: 12px 18px;
+    font-weight: 600;
+
+    align-self: flex-start;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--primary);
+
+    box-shadow: 1px 1px var(--shadow);
+    color: white;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+
+    cursor: pointer;
+}
+
+button:hover {
+
+    border: 1px solid var(--border-hover);
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    padding: 14px;
+
+    height: 60vh;
+    overflow-y: scroll;
+}

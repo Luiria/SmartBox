@@ -1,0 +1,11 @@
+{
+  "folders": [
+    { "path": "." },
+    { "path": "frontend" },
+    { "path": "backend" },
+    { "path": "Iot" },
+  ],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "frontend",
+  },
+}

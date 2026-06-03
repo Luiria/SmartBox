@@ -1,0 +1,41 @@
+footer {
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    margin-top: var(--space-10);
+
+    background: var(--surface-low);
+    backdrop-filter: blur(12px);
+
+    border-top: 1px solid var(--border);
+    box-shadow: var(--shadow);
+
+    color: var(--on-surface-variante);
+
+
+}
+
+.footer_container {
+
+    width: 100%;
+    max-width: var(--container-lg);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto;
+    padding: 20px 24px;
+
+    font-size: var(--text-body);
+}
+
+caption {
+    padding-top: 8px;
+    font-size: var(--text-caption);
+    color: var(--on-surface-disabled);
+}

@@ -1,0 +1,41 @@
+.event {
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+    padding: 24px;
+
+    border: 1px solid var(--border);
+    border-radius: 16px;
+
+    backdrop-filter: blur(12px);
+    background: rgba(17, 24, 39, 0.85);
+    box-shadow: var(--shadow);
+
+    font-size: var(--text-body);
+    color: var(--on-surface);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.event:hover {
+    transform: translateY(-4px);
+    border-color:
+        var(--border-hover);
+}
+
+.email {
+    font-weight: 700;
+}
+
+.message {
+    line-height: 1.5;
+}
+
+.date {
+    font-size:var(--text-caption);
+    color: var(--on-surface-disabled);
+}

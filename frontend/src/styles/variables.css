@@ -1,0 +1,100 @@
+:root {
+
+        /* Typography  */
+        /* base 16: 14px - 16px - 24px - 32px */
+
+        --text-caption: 0.875rem;
+        --text-body: 1rem;
+        --text-title: 1.5rem;
+        --text-display: 2rem;
+
+        /* Spacing  */
+        --space-1: 4px;
+        --space-2: 8px;
+        --space-3: 12px;
+        --space-4: 16px;
+        --space-6: 24px;
+        --space-8: 32px;
+        --space-10: 40px;
+        --space-12: 48px;
+        --space-16: 64px;
+        --space-24: 96px;
+
+        /* Radius */
+
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        --radius-xl: 24px;
+
+
+        --container-lg: 1200px;
+
+        /* COLOR */
+
+        /* ! varaible a mettre + mesures ^4 */
+
+        --gradient-primary: linear-gradient(135deg,
+                        var(--primary),
+                        color-mix(in srgb, var(--primary) 70%, white));
+
+
+        --color-brand-50: hsl(226.2 48.1% 94.7%);
+        --color-brand-100: hsl(228 45.5% 89.2%);
+        --color-brand-200: hsl(226.8 48.1% 79.6%);
+        --color-brand-300: hsl(224.6 48.8% 68.6%);
+        --color-brand-400: hsl(222.5 48.4% 58.2%);
+        --color-brand-500: hsl(222.2 35.4% 44.9%);
+        --color-brand-600: hsl(221.9 37.3% 33.1%);
+        --color-brand-700: hsl(223.3 39.4% 21.4%);
+        --color-brand-800: hsl(222.2 47.4% 11.2%);
+        --color-brand-900: hsl(222 55.6% 7.1%);
+        --color-brand-950: hsl(226.2 61.9% 4.1%);
+
+
+
+        /* PRIMARY */
+        --primary: var(--color-brand-500);
+        --primary-hover: var(--color-brand-400);
+        --primary-active: var(--color-brand-600);
+        --on-primary: white;
+
+        /* TEXT */
+        --on-surface: rgba(255, 255, 255, 0.95);
+        --on-surface-variante: rgba(255, 255, 255, 0.65);
+        --on-surface-disabled: rgba(255, 255, 255, 0.4);
+
+        /* BACKGROUND */
+        --background: var(--color-brand-950);
+
+        /* SURFACES */
+        --surface-lowest: var(--color-brand-950);
+        --surface-low: var(--color-brand-900);
+        --surface: var(--color-brand-800);
+        --surface-high: var(--color-brand-700);
+        --surface-highest: color-mix(in srgb, var(--color-brand-600) 80%, black);
+
+        /* BORDERS */
+        --border: rgba(255, 255, 255, 0.2);
+        --border-hover: rgba(255, 255, 255, 0.15);
+
+        /* GLASS */
+        --glass-bg: color-mix(in srgb, var(--color-brand-950) 40%, transparent);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-blur: 12px;
+
+        /* EFFECTS */
+        --shadow: rgba(0, 0, 0, 0.25);
+        --glow: rgba(16, 102, 129, 0.25);
+
+        /* GRADIENT */
+        --gradient-primary:
+                linear-gradient(180deg,
+                        var(--color-brand-800) 0%,
+                        color-mix(in srgb, var(--color-brand-900) 60%, black));
+
+        --gradient-notification:
+                linear-gradient(180deg,
+                        var(--color-brand-800) 0%,
+                        color-mix(in srgb, var(--color-brand-950) 40%, black));
+}
