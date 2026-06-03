@@ -4,11 +4,10 @@
 !.vscode/settings.json
 !.vscode/extensions.json
 
+README_vf.md
+
 .env
 *.log
-
-# FRONTEND
-
 
 # BACKEND
 
