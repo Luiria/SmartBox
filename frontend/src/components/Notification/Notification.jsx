@@ -8,16 +8,25 @@ export default function Notification({ notifications }) {
   return (
     <div className={styles.notification_container}>
       <ul>
-        {notifications.map((event) => (
-          <li key={event.id} className={styles.notification}>
+        
+        {notifications.map((event) => {
+          
+          const date = new Date(event.created_at).toLocaleString("fr-FR", {
+            dateStyle: "medium",
+            timeStyle: "short",
+          });
 
-            <p className={styles.message}>
-              {event.message.slice(0, max) + "..."}
-            </p>
-            <p className={styles.date}>{event.created_at}</p>
-            
-          </li>
-        ))}
+          return (
+            <li key={event.id} className={styles.notification}>
+              <p className={styles.message}>
+                {event.message.slice(0, max) + "..."}
+              </p>
+              <p className={styles.date}>{date}</p>
+            </li>
+          );
+
+        })}
+
       </ul>
     </div>
   );
