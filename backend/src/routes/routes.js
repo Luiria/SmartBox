@@ -1,6 +1,7 @@
 import express from "express";
 
-import eventRoute from "../modules/events/event.module.js";
+// import eventRoute from "../modules/events/event.module.js";
+import { router as eventRoute } from "../modules/events/event.module.js";
 
 const router = express.Router();
 
